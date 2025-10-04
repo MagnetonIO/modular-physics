@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modular Physics - Compositional Framework for Fundamental Laws</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --dark: #111827;
+            --light: #f9fafb;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1));
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+
+        .hero-equation {
+            font-size: 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: inline-block;
+            margin: 2rem 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Laws Grid */
+        .laws-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .laws-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .law-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .law-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .law-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .law-equation {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        /* Interactive Calculator */
+        .calculator-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(37, 99, 235, 0.1));
+        }
+
+        .calculator {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .result {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        /* Features */
+        .features-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 1rem;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-equation {
+                font-size: 1.5rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .laws-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        /* Canvas Background */
+        #physics-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">⚛️ Modular Physics</div>
+            <ul class="nav-links">
+                <li><a href="#laws">Laws</a></li>
+                <li><a href="#calculator">Calculator</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="https://github.com/yourusername/modular-physics">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <canvas id="physics-canvas"></canvas>
+        <div class="hero-content fade-in">
+            <h1>Modular Physics</h1>
+            <p class="hero-subtitle">A Compositional Framework for Fundamental Laws</p>
+            <div class="hero-equation">E = Ic²</div>
+            <p>Where information density I replaces mass m, revealing the computational substrate of reality</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/yourusername/modular-physics" class="btn btn-primary">View on GitHub</a>
+                <a href="#calculator" class="btn btn-secondary">Try Calculator</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="laws" class="laws-section">
+        <h2 class="section-title">Four Fundamental Laws</h2>
+        <div class="laws-grid">
+            <div class="law-card fade-in">
+                <h3>🔬 Size-Aware Conversion</h3>
+                <div class="law-equation">E ≥ (ℏc ln 2)/(2πkR) · I</div>
+                <p>Minimum energy to localize information I within spatial extent R</p>
+            </div>
+            <div class="law-card fade-in">
+                <h3>🌡️ Thermal Processing</h3>
+                <div class="law-equation">E ≥ kT ln 2 · I</div>
+                <p>Landauer's principle: fundamental cost of information erasure</p>
+            </div>
+            <div class="law-card fade-in">
+                <h3>🌌 Geometric Emergence</h3>
+                <div class="law-equation">I ~ Area/(4ℓ²ₚ ln 2)</div>
+                <p>Spacetime emerges when information saturates holographic bounds</p>
+            </div>
+            <div class="law-card fade-in">
+                <h3>🪐 Gravitational Flow</h3>
+                <div class="law-equation">δS = δQ/T ⟹ Gμν = 8πG/c⁴ Tμν</div>
+                <p>Einstein equations from thermodynamic information flow</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="calculator" class="calculator-section">
+        <h2 class="section-title">Interactive Calculator</h2>
+        <div class="calculator">
+            <div class="input-group">
+                <label for="bits">Information (bits):</label>
+                <input type="number" id="bits" value="1024" min="1">
+            </div>
+            <div class="input-group">
+                <label for="temperature">Temperature (K):</label>
+                <input type="number" id="temperature" value="298.15" min="0.001">
+            </div>
+            <div class="input-group">
+                <label for="scale">Length Scale (m):</label>
+                <input type="number" id="scale" value="1e-9" min="1e-35" step="1e-10">
+            </div>
+            <div class="input-group">
+                <label for="law">Select Law:</label>
+                <select id="law">
+                    <option value="thermal">Thermal (Landauer)</option>
+                    <option value="sizeaware">Size-Aware</option>
+                    <option value="both">Most Restrictive</option>
+                </select>
+            </div>
+            <button class="btn btn-primary" onclick="calculate()">Calculate Energy</button>
+            <div class="result" id="result">
+                Energy: -- Joules
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features-section">
+        <h2 class="section-title">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature fade-in">
+                <div class="feature-icon">📦</div>
+                <h3>Modular Design</h3>
+                <p>Each law operates independently and can be composed</p>
+            </div>
+            <div class="feature fade-in">
+                <div class="feature-icon">🔒</div>
+                <h3>Type Safe</h3>
+                <p>Haskell ensures dimensional consistency</p>
+            </div>
+            <div class="feature fade-in">
+                <div class="feature-icon">🔄</div>
+                <h3>Portable</h3>
+                <p>Easy translation to Python, Julia, or other languages</p>
+            </div>
+            <div class="feature fade-in">
+                <div class="feature-icon">📚</div>
+                <h3>Educational</h3>
+                <p>Self-documenting code with physics explanations</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2024 Modular Physics Project</p>
+        <div class="footer-links">
+            <a href="https://github.com/yourusername/modular-physics">GitHub</a>
+            <a href="https://github.com/yourusername/modular-physics/blob/main/README.md">Documentation</a>
+            <a href="https://github.com/yourusername/modular-physics/issues">Issues</a>
+        </div>
+    </footer>
+
+    <script>
+        // Constants
+        const h_bar = 1.054571817e-34;
+        const c = 299792458;
+        const k_B = 1.380649e-23;
+        const ln2 = 0.6931471805599453;
+
+        // Calculator
+        function calculate() {
+            const bits = parseFloat(document.getElementById('bits').value);
+            const temp = parseFloat(document.getElementById('temperature').value);
+            const scale = parseFloat(document.getElementById('scale').value);
+            const law = document.getElementById('law').value;
+            
+            let energy;
+            
+            if (law === 'thermal') {
+                energy = k_B * temp * ln2 * bits;
+            } else if (law === 'sizeaware') {
+                energy = (h_bar * c * ln2) / (2 * Math.PI * k_B * scale) * bits;
+            } else {
+                const thermal = k_B * temp * ln2 * bits;
+                const sizeaware = (h_bar * c * ln2) / (2 * Math.PI * k_B * scale) * bits;
+                energy = Math.max(thermal, sizeaware);
+            }
+            
+            document.getElementById('result').innerHTML = `
+                Energy: ${energy.toExponential(3)} Joules<br>
+                <small>Equivalent to ${(energy / 1.602e-19).toExponential(3)} eV</small>
+            `;
+        }
+
+        // Animated Canvas Background
+        const canvas = document.getElementById('physics-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = document.querySelector('.hero').offsetHeight;
+        }
+        
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Particle animation
+        const particles = [];
+        const particleCount = 50;
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(37, 99, 235, 0.5)';
+                ctx.fill();
+            }
+        }
+
+        // Initialize particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        // Draw connections between nearby particles
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(37, 99, 235, ${0.2 * (1 - distance / 100)})`;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Animation loop
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            
+            drawConnections();
+            
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.6s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
