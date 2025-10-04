@@ -2,8 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Modular Physics - Compositional Framework for Fundamental Laws</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Modular Physics - Compositional Framework for Fundamental Laws">
+    <meta name="description" content="A revolutionary framework where physical laws emerge from information-theoretic constraints. Discover how E=Ic² reveals the computational substrate of reality.">
+    <meta name="keywords" content="modular physics, information theory, quantum mechanics, E=Ic2, emergent spacetime, holographic principle, quantum computing">
+    <meta name="author" content="Modular Physics Project">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://magnetonio.github.io/modular-physics/">
+    <meta property="og:title" content="Modular Physics - Where Information Becomes Reality">
+    <meta property="og:description" content="Explore the fundamental laws of physics through information theory. E=Ic² reveals mass as information density and spacetime as emergent from quantum error correction.">
+    <meta property="og:image" content="https://magnetonio.github.io/modular-physics/social-preview.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Modular Physics">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://magnetonio.github.io/modular-physics/">
+    <meta property="twitter:title" content="Modular Physics - Where Information Becomes Reality">
+    <meta property="twitter:description" content="Explore the fundamental laws of physics through information theory. E=Ic² reveals the computational substrate of reality.">
+    <meta property="twitter:image" content="https://magnetonio.github.io/modular-physics/social-preview.png">
+    
+    <!-- Additional SEO -->
+    <link rel="canonical" href="https://magnetonio.github.io/modular-physics/">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚛️</text></svg>">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Modular Physics",
+      "url": "https://magnetonio.github.io/modular-physics/",
+      "description": "A compositional framework for fundamental physics laws based on information-theoretic principles",
+      "author": {
+        "@type": "Organization",
+        "name": "Modular Physics Project"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://github.com/MagnetonIO/modular-physics/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
     <style>
         :root {
             --primary: #2563eb;
@@ -291,25 +344,156 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-
-            .hero-equation {
-                font-size: 1.5rem;
+            .nav-container {
                 padding: 1rem;
             }
 
             .nav-links {
-                display: none;
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                width: 200px;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: -2px 2px 10px rgba(0,0,0,0.1);
+                transition: right 0.3s;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                cursor: pointer;
+                color: var(--primary);
+            }
+
+            .hero {
+                padding: 6rem 1rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                line-height: 1.4;
+            }
+
+            .hero-equation {
+                font-size: 1.3rem;
+                padding: 0.75rem;
+                margin: 1rem 0;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
             }
 
             .laws-grid {
                 grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .law-card {
+                padding: 1.5rem;
+            }
+
+            .law-equation {
+                font-size: 0.9rem;
+                padding: 0.75rem;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+
+            .calculator {
+                padding: 1.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            /* Touch-friendly sizes */
+            button, .btn {
+                min-height: 44px;
+                padding: 12px 20px;
+            }
+
+            input, select {
+                min-height: 44px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+
+        /* Accessibility improvements */
+        :focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        button:focus, .btn:focus {
+            outline: 2px solid white;
+            outline-offset: 2px;
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) {
+            .law-card:hover {
+                transform: none;
+            }
+
+            .btn:hover {
+                transform: none;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .nav-container {
+                border-bottom: 1px solid var(--dark);
+            }
+
+            .law-card, .calculator {
+                border: 2px solid var(--dark);
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
             }
         }
 
@@ -345,12 +529,13 @@
     <nav>
         <div class="nav-container">
             <div class="nav-logo">⚛️ Modular Physics</div>
-            <ul class="nav-links">
-                <li><a href="#laws">Laws</a></li>
-                <li><a href="#calculator">Calculator</a></li>
-                <li><a href="#features">Features</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#laws" onclick="closeMenu()">Laws</a></li>
+                <li><a href="#calculator" onclick="closeMenu()">Calculator</a></li>
+                <li><a href="#features" onclick="closeMenu()">Features</a></li>
                 <li><a href="https://github.com/MagnetonIO/modular-physics">GitHub</a></li>
             </ul>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">☰</button>
         </div>
     </nav>
 
@@ -362,7 +547,7 @@
             <div class="hero-equation">E = Ic²</div>
             <p>Where information density I replaces mass m, revealing the computational substrate of reality</p>
             <div class="cta-buttons">
-                <a href="https://github.com/yourusername/modular-physics" class="btn btn-primary">View on GitHub</a>
+                <a href="https://github.com/MagnetonIO/modular-physics" class="btn btn-primary">View on GitHub</a>
                 <a href="#calculator" class="btn btn-secondary">Try Calculator</a>
             </div>
         </div>
@@ -453,13 +638,33 @@
     <footer>
         <p>© 2024 Modular Physics Project</p>
         <div class="footer-links">
-            <a href="https://github.com/yourusername/modular-physics">GitHub</a>
-            <a href="https://github.com/yourusername/modular-physics/blob/main/README.md">Documentation</a>
-            <a href="https://github.com/yourusername/modular-physics/issues">Issues</a>
+            <a href="https://github.com/MagnetonIO/modular-physics">GitHub</a>
+            <a href="https://github.com/MagnetonIO/modular-physics/blob/main/README.md">Documentation</a>
+            <a href="https://github.com/MagnetonIO/modular-physics/issues">Issues</a>
         </div>
     </footer>
 
     <script>
+        // Mobile menu functions
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.remove('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (!nav.contains(event.target) && !menuToggle.contains(event.target)) {
+                closeMenu();
+            }
+        });
+
         // Constants
         const h_bar = 1.054571817e-34;
         const c = 299792458;
