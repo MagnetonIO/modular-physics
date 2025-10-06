@@ -157,19 +157,18 @@ energy2 = thermalSizeAware temp radius bits
 (energy, valid) = completeFourLawBound temp radius bits
 ```
 
-## Validation Results
+## Validation
 
-The framework has been validated against known physics:
+The framework has been validated against fundamental physics principles:
 
-✅ **Validated Laws** (8/10 tests passing):
+✅ **Validated Laws**:
 - Size-Aware Energy Law
 - Mass-Energy Equivalence (E=mc²)
 - Bekenstein Bound
 - Margolus-Levitin Bound
 - Landauer's Principle
 - Scale Invariance
-- Energy Density Calculations
-- Reversible vs Irreversible Computation
+- Thermodynamic Consistency
 
 ## Physical Implications
 
