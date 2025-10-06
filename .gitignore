@@ -1,0 +1,20 @@
+.stack-work/
+*~
+*.hi
+*.o
+validate-laws
+
+# LaTeX compilation artifacts
+papers/compiled/*.aux
+papers/compiled/*.log
+papers/compiled/*.out
+papers/compiled/*.toc
+papers/compiled/*.fls
+papers/compiled/*.fdb_latexmk
+papers/compiled/*.synctex.gz
+
+# Haskell build artifacts
+dist/
+dist-newstyle/
+.cabal-sandbox/
+cabal.sandbox.config

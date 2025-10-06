@@ -51,9 +51,8 @@ isValidConfiguration bits energy radius =
     bits <= bekensteinBound energy radius
 
 -- | Energy density from size-aware conversion
-sizeAwareEnergyDensity :: InformationDensity -> Length -> Double
-sizeAwareEnergyDensity infoDensity charLength =
-    let volume = (4/3) * pi * charLength ** 3
-        totalBits = infoDensity * volume
-        energy = sizeAwareEnergy totalBits charLength
+sizeAwareEnergyDensity :: Bits -> Length -> Double
+sizeAwareEnergyDensity bits radius =
+    let volume = (4/3) * pi * radius ** 3
+        energy = sizeAwareEnergy bits radius
     in energy / volume

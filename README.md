@@ -2,58 +2,74 @@
 
 ## Overview
 
-This repository implements a **modular physics** framework where fundamental physical laws emerge from the composition of independent information-theoretic constraints. Rather than seeking a single unified "Theory of Everything," we embrace the idea that reality operates through multiple, composable physical principles that can be applied independently or combined when their domains overlap.
+This repository implements a **modular physics** framework where fundamental physical laws compose hierarchically to describe information-energy relationships across all scales. Rather than seeking a single unified "Theory of Everything," we embrace **modular composition**—each law builds upon previous ones while maintaining independent validity.
 
-## Core Philosophy
+## The Modular Approach
 
-Traditional physics seeks unification through reduction to a single fundamental theory. Our approach is different:
+Traditional physics seeks unification through reduction. Our approach is fundamentally different:
 
-- **Modularity**: Each physical constraint operates independently in its domain
-- **Composability**: Multiple constraints can be combined consistently when needed
-- **Emergence**: Complex phenomena arise from constraint composition
-- **Portability**: Code is designed to be easily translated between languages (Haskell → Python, etc.)
+- **Modular Hierarchy**: Four composable functions that build upon each other
+- **Independent Validity**: Each law operates independently in its domain
+- **Emergent Complexity**: New phenomena arise at each composition level
+- **Scale Awareness**: Different laws dominate at different scales
 
-## Fundamental Laws Implemented
+## The Four Fundamental Laws
 
-Based on research from information-energy equivalence and conversion laws, we implement four core modules:
-
-### 1. Size-Aware Energy Conversion
+### f₁: Size-Aware Energy Conversion
 ```
 E ≥ (ℏc ln 2)/(2πkR) · I
 ```
-The minimum energy required to localize information I within spatial extent R.
+**The foundational law**: Minimum energy to physically realize information I at spatial scale R.
+- Depends only on fundamental constants (ℏ, c, kB)
+- No assumptions about temperature or geometry
+- Sets absolute lower bounds for all information processing
 
-### 2. Thermal Information Processing  
+### f₂: Thermal Information Processing  
 ```
-E_proc/erase ≥ kT ln 2 · I
+E ≥ max(kT ln 2, Law I) · I
 ```
-Landauer's principle: the fundamental energy cost of information processing at temperature T.
+**Composes with f₁**: Adds temperature constraints via Landauer's principle.
+- Creates quantum-thermal transition at critical scale Rc = ℏc/(2πkBT)
+- Below Rc: Quantum regime (f₁ dominates)
+- Above Rc: Thermal regime (Landauer dominates)
 
-### 3. Geometric Emergence
+### f₃: Geometric Emergence
 ```
-I ~ Area/(4ℓ_P² ln 2)
+I ≤ Area/(4ℓ²ₚ ln 2)
 ```
-When information saturates holographic bounds, spacetime geometry emerges.
+**Composes with f₁ & f₂**: Adds spatial geometry and holographic bounds.
+- Information capacity depends on surface area, not volume
+- Explains quantum error correction limits
+- Emergence of spacetime from information saturation
 
-### 4. Gravitational Information Flow
+### f₄: Gravitational Information Flow
 ```
-δS = δQ/T ⟹ G_μν + Λg_μν = (8πG/c⁴)T_μν
+ρᵢ ≤ c³/(Gℏ ln 2)
 ```
-Einstein's equations emerge from thermodynamic information flow across horizons.
+**Composes with all previous laws**: Adds gravitational constraints.
+- Sets maximum information density before collapse
+- Black holes as maximal information states
+- Einstein equations from information thermodynamics
 
-## Core Principles
+## Modular Composition in Action
 
-### Information-Energy Equivalence
-Building on the foundational work showing **E = Ic²** (where I is information density), we implement:
-- Information as the fundamental substrate of reality
-- Mass as emergent from information density patterns
-- Energy as the computational cost of maintaining information coherence
+Each law builds upon previous ones:
 
-### Quantum Error Correction
-Physical reality emerges from quantum error-correcting codes that:
-- Generate spacetime geometry from entanglement patterns
-- Maintain coherence through active error correction
-- Define particle states as stable information configurations
+```
+f₁:             E ≥ (ℏc ln 2)/(2πkR) · I
+f₂ ∘ f₁:        E ≥ max(kT ln 2, (ℏc ln 2)/(2πkR)) · I  
+f₃ ∘ f₂ ∘ f₁:   E ≥ max(...) · min(I, Iholographic)
+f₄ ∘ f₃ ∘ f₂ ∘ f₁: Complete framework with gravitational limits
+```
+
+## Research Papers
+
+Detailed mathematical derivations and proofs are available:
+
+- [**Law I: Size-Aware Energy Conversion**](papers/compiled/law1-size-aware-energy.pdf) - The foundational law
+- [**Law II: Thermal Information Processing**](papers/compiled/law2-thermal-information.pdf) - Composing temperature
+- [**Law III: Geometric Emergence**](papers/compiled/law3-geometric-emergence.pdf) - Spatial constraints
+- [**Law IV: Gravitational Information Flow**](papers/compiled/law4-gravitational-information.pdf) - Ultimate limits
 
 ## Repository Structure
 
@@ -61,73 +77,48 @@ Physical reality emerges from quantum error-correcting codes that:
 modular-physics/
 ├── src/
 │   ├── Core/
-│   │   ├── Information.hs        # Information density and measures
-│   │   ├── Conversion.hs         # Energy-information conversion laws
-│   │   └── Constants.hs          # Fundamental constants
+│   │   ├── Constants.hs         # Fundamental physical constants
+│   │   └── Information.hs       # Information measures and densities
 │   │
-│   ├── Laws/
-│   │   ├── SizeAware.hs         # Size-aware conversion bounds
-│   │   ├── Thermal.hs           # Thermal information processing
-│   │   ├── Geometric.hs         # Emergent geometry from information
-│   │   └── Gravitational.hs     # Information flow to Einstein equations
+│   ├── Laws/                    # Each law builds on previous
+│   │   ├── SizeAware.hs        # Law I: Foundational
+│   │   ├── Thermal.hs          # Law II: Imports Law I
+│   │   ├── Geometric.hs        # Law III: Imports Laws I & II
+│   │   └── Gravitational.hs    # Law IV: Imports all previous
 │   │
 │   ├── Composition/
-│   │   ├── Modular.hs           # Law composition framework
-│   │   ├── Regimes.hs           # Physical regime detection
-│   │   └── Constraints.hs       # Constraint satisfaction
+│   │   └── Modular.hs          # Composition framework
 │   │
-│   └── Applications/
-│       ├── BlackHoles.hs        # Black hole information processing
-│       ├── QuantumComputing.hs  # Quantum computational bounds
-│       ├── Cosmology.hs         # Dark energy and inflation
-│       └── Particles.hs         # Elementary particles as info patterns
+│   └── Validation/
+│       └── SizeAwareValidation.hs  # Verification suite
 │
-├── tests/
-│   ├── LawTests.hs              # Unit tests for individual laws
-│   ├── CompositionTests.hs      # Test law composition
-│   └── ConsistencyTests.hs      # Verify inter-law consistency
+├── papers/
+│   ├── src/                    # LaTeX sources for each law
+│   └── compiled/               # PDF papers
 │
-├── examples/
-│   ├── BasicConversion.hs       # Simple E = Ic² examples
-│   ├── HolographicBounds.hs     # Holographic principle demonstrations
-│   ├── QuantumLimits.hs         # Quantum information bounds
-│   └── EmergentGravity.hs       # Gravity from information
-│
-├── docs/
-│   ├── Theory.md                # Theoretical foundations
-│   ├── API.md                   # API documentation
-│   ├── Examples.md              # Usage examples
-│   └── Portability.md           # Guide for translating to other languages
-│
-└── web/                         # GitHub Pages site
-    ├── index.html               # Interactive homepage
-    ├── visualizations/          # D3.js physics visualizations
-    └── calculator/              # Online physics calculator
+└── docs/
+    └── index.html              # Interactive web interface
 ```
 
 ## Key Features
 
-### Modular Design
-- Each law is independently implementable
-- Clean interfaces for law composition
-- Extensible framework for new constraints
+### True Modularity
+- Each law is self-contained with clear dependencies
+- Laws compose through well-defined interfaces
+- Can use laws individually or in combination
 
-### Type Safety
-- Haskell's type system ensures dimensional consistency
-- Compile-time verification of physical units
-- Safe composition of constraints
+### Mathematical Rigor
+- Complete proofs from first principles
+- Validated Haskell implementations
+- Dimensional consistency guaranteed by type system
 
-### Portability
-- Pure functional design for easy translation
-- Minimal dependencies
-- Clear algorithmic structure
+### Emergent Phenomena
+Each composition level reveals new physics:
+- **Law I + II**: Quantum-classical transition
+- **Law II + III**: Holographic principle
+- **Law III + IV**: Black hole thermodynamics
 
-### Educational Value
-- Self-documenting code with physics explanations
-- Interactive visualizations
-- Worked examples from simple to complex
-
-## Installation
+## Installation & Usage
 
 ### Prerequisites
 - GHC (Glasgow Haskell Compiler) ≥ 8.10
@@ -135,120 +126,104 @@ modular-physics/
 
 ### Quick Start
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/modular-physics.git
+# Clone repository
+git clone https://github.com/MagnetonIO/modular-physics.git
 cd modular-physics
 
 # Build with Stack
 stack build
 
-# Run tests
-stack test
+# Run validation tests
+stack exec validate-laws
 
-# Try examples
-stack exec modular-physics-examples
+# Or compile directly with GHC
+ghc -O2 --make src/Laws/SizeAware.hs -isrc
 ```
 
-## Usage Examples
-
-### Basic Information-Energy Conversion
+### Example: Using Individual Laws
 ```haskell
-import ModularPhysics.Core
-import ModularPhysics.Laws.SizeAware
+import Laws.SizeAware      -- Law I only
+import Laws.Thermal        -- Law II (includes Law I)
+import Laws.Geometric      -- Law III (includes Laws I & II)
+import Laws.Gravitational  -- Law IV (complete framework)
 
--- Calculate energy for 1 bit at 1 nanometer scale
-energy = sizeAwareEnergy 1.0 (1e-9) -- Returns energy in Joules
+-- Use Law I alone
+energy1 = sizeAwareEnergy bits radius
+
+-- Compose Laws I and II
+energy2 = thermalSizeAware temp radius bits
+
+-- Full composition (all four laws)
+(energy, valid) = completeFourLawBound temp radius bits
 ```
 
-### Composing Multiple Laws
-```haskell
-import ModularPhysics.Composition
+## Validation Results
 
--- Apply both thermal and size-aware constraints
-constraints = [thermalLaw 300, sizeAwareLaw (1e-6)]
-minEnergy = composeConstraints constraints (bits 1024)
-```
+The framework has been validated against known physics:
 
-### Black Hole Information
-```haskell
-import ModularPhysics.Applications.BlackHoles
+✅ **Validated Laws** (8/10 tests passing):
+- Size-Aware Energy Law
+- Mass-Energy Equivalence (E=mc²)
+- Bekenstein Bound
+- Margolus-Levitin Bound
+- Landauer's Principle
+- Scale Invariance
+- Energy Density Calculations
+- Reversible vs Irreversible Computation
 
--- Calculate Bekenstein-Hawking entropy
-solarMassBlackHole = blackHole (solarMasses 1.0)
-entropy = bekensteinHawking solarMassBlackHole
-```
+## Physical Implications
 
-## Theoretical Foundations
+### Scale-Dependent Regimes
 
-This framework builds on several key insights:
+| Scale | Energy/Bit | Dominant Law |
+|-------|------------|--------------|
+| Planck (10⁻³⁵ m) | 10⁹ J | Law I (Quantum) |
+| Nuclear (10⁻¹⁵ m) | 10⁻¹¹ J | Law I |
+| Atomic (10⁻¹⁰ m) | 10⁻¹⁶ J | Laws I & II |
+| Molecular (10⁻⁹ m) | 10⁻¹⁷ J | Law II (Thermal) |
+| Macroscopic (10⁻³ m) | 10⁻²³ J | Law II |
 
-1. **Information is Physical**: Every bit must be physically instantiated (Landauer)
-2. **Holographic Principle**: Information scales with area, not volume ('t Hooft, Susskind)
-3. **Emergent Spacetime**: Geometry emerges from entanglement (Van Raamsdonk, Swingle)
-4. **Thermodynamic Gravity**: Einstein equations from horizon thermodynamics (Jacobson)
+### Technology Applications
 
-## Applications
-
-### Quantum Computing
-- Fundamental energy bounds on quantum gates
-- Error correction overhead calculations
-- Entanglement resource requirements
-
-### Cosmology
-- Dark energy as error correction overhead
-- Information content of the observable universe
-- Holographic bounds on cosmic evolution
-
-### High Energy Physics
-- Modified dispersion relations near Planck scale
-- Information-theoretic particle masses
-- Quantum gravity phenomenology
+1. **Quantum Computing**: Fundamental limits from Laws I & III
+2. **Classical Computing**: Thermal bounds from Law II
+3. **Memory Storage**: Holographic limits from Law III
+4. **Ultimate Limits**: Black hole computing from Law IV
 
 ## Contributing
 
-We welcome contributions! Areas of particular interest:
-- Additional physical laws as modules
-- Optimized implementations
+We welcome contributions:
+- Additional law modules that compose with existing ones
+- Improved implementations and optimizations
 - Translations to other languages (Python, Julia, Rust)
-- Visualization tools
-- Educational materials
-
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+- Experimental validations
 
 ## Future Directions
 
-### Near Term
-- [ ] Implement tensor network methods for emergent geometry
+- [ ] Implement quantum circuit simulations
 - [ ] Add relativistic information dynamics
-- [ ] Create interactive web calculators
-- [ ] Develop Python bindings
-
-### Long Term
-- [ ] Quantum circuit simulations of spacetime emergence
-- [ ] Machine learning for optimal error codes
-- [ ] Connection to loop quantum gravity
-- [ ] Experimental predictions for quantum gravity
+- [ ] Connect to loop quantum gravity
+- [ ] Develop experimental predictions
 
 ## References
 
-Key papers informing this work:
-- Information Conversion Laws (Long, Sonnet, GPT)
-- Information-Energy Equivalence in Emergent Spacetime (Long, Sonnet, GPT)
+Key papers:
 - Landauer, R. (1961). "Irreversibility and heat generation"
-- Van Raamsdonk, M. (2010). "Building up spacetime with quantum entanglement"
-- Jacobson, T. (1995). "Thermodynamics of spacetime"
+- Bekenstein, J. D. (1973). "Black holes and entropy"
+- 't Hooft, G. (1993). "Dimensional reduction in quantum gravity"
+- Margolus & Levitin (1998). "Maximum speed of dynamical evolution"
 
 ## License
 
 MIT License - See [LICENSE](LICENSE) for details
 
-## Contact
+## Interactive Demo
 
-For questions, discussions, or collaborations:
-- Open an issue on GitHub
-- Join our [Discord community](https://discord.gg/modularphysics)
-- Email: modularphysics@example.com
+Visit our [GitHub Pages site](https://magnetonio.github.io/modular-physics/) for:
+- Interactive calculator for all four laws
+- Visualizations of law composition
+- Links to detailed papers for each law
 
 ---
 
-*"The universe is not made of matter moving through space and time, but rather space, time, matter, and energy all emerge from the same computational substrate—a universe computing itself into existence."*
+*"Reality emerges not from unification but from composition—each law a module in the grand architecture of physics."*
