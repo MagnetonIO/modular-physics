@@ -66,10 +66,10 @@ f₄ ∘ f₃ ∘ f₂ ∘ f₁: Complete framework with gravitational limits
 
 Detailed mathematical derivations and proofs are available:
 
-- [**Law I: Size-Aware Energy Conversion**](papers/compiled/law1-size-aware-energy.pdf) - The foundational law
-- [**Law II: Thermal Information Processing**](papers/compiled/law2-thermal-information.pdf) - Composing temperature
-- [**Law III: Geometric Emergence**](papers/compiled/law3-geometric-emergence.pdf) - Spatial constraints
-- [**Law IV: Gravitational Information Flow**](papers/compiled/law4-gravitational-information.pdf) - Ultimate limits
+- <a href="papers/compiled/law1-size-aware-energy.pdf" target="_blank"><strong>Law I: Size-Aware Energy Conversion</strong></a> - The foundational law
+- <a href="papers/compiled/law2-thermal-information.pdf" target="_blank"><strong>Law II: Thermal Information Processing</strong></a> - Composing temperature
+- <a href="papers/compiled/law3-geometric-emergence.pdf" target="_blank"><strong>Law III: Geometric Emergence</strong></a> - Spatial constraints
+- <a href="papers/compiled/law4-gravitational-information.pdf" target="_blank"><strong>Law IV: Gravitational Information Flow</strong></a> - Ultimate limits
 
 ## Repository Structure
 
@@ -235,7 +235,7 @@ MIT License - See [LICENSE](LICENSE) for details
 
 ## Interactive Demo
 
-Visit our [GitHub Pages site](https://magnetonio.github.io/modular-physics/) for:
+Visit our <a href="https://magnetonio.github.io/modular-physics/" target="_blank">GitHub Pages site</a> for:
 - Interactive calculator for all four laws
 - Visualizations of law composition
 - Links to detailed papers for each law
