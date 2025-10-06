@@ -83,7 +83,7 @@ draw.text((width/2, 380), "E = Ic²",
           font=equation_font, fill='white', anchor='mm')
 
 # Tagline
-draw.text((width/2, 490), "Where Information Becomes Reality", 
+draw.text((width/2, 490), "Laws That Compose, Not Unify", 
           font=tagline_font, fill=(255, 255, 255, 216), anchor='mm')
 
 # Four laws at bottom
