@@ -30,6 +30,14 @@ executable modular-physics
                        -Wpartial-fields
                        -Wredundant-constraints
 
+test-suite modular-physics-test
+  type:                exitcode-stdio-1.0
+  main-is:             TestSuite.hs
+  hs-source-dirs:      test, src
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+  ghc-options:         -Wall -threaded -rtsopts -with-rtsopts=-N
+
 source-repository head
   type:     git
   location: https://github.com/githubuser/modular-physics
